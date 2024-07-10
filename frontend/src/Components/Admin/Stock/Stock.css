@@ -1,0 +1,48 @@
+.ai-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
+  }
+  
+  .ai-button-div {
+    text-align: right;
+  }
+  
+  .ai-button {
+    background-color: #3572ef;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 25px;
+    color: white;
+  }
+  
+  .ai-button:hover {
+    background-color: #050c9c;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f5f5dc;
+  }
+  
+  th,
+  td {
+    padding: 10px 5px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #d3d3d3;
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f0ebe3;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #fefaf6;
+  }
+  

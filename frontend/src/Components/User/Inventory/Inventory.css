@@ -1,0 +1,59 @@
+.ui-topbar {
+    display: flex;
+    background-color: #135f76;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .ui-topbar p {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0;
+    transition: background-color 0.3s ease;
+    color: white;
+  }
+  
+  .ui-topbar .active-tab {
+    font-weight: bold;
+    background-color: #000000;
+    color: white;
+  }
+  
+  .ui-content {
+    padding: 10px 100px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f5f5dc;
+  }
+  
+  th,
+  td {
+    padding: 10px 5px;
+    border: 1px solid #000000;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #d3d3d3;
+    font-weight: bold;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .ui-hr {
+    width: 1px;
+    padding: 0;
+    background-color: white;
+    height: 35px;
+    margin: 5px;
+  }
+  

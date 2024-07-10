@@ -1,0 +1,14 @@
+.notification-item.read {
+    background-color: #135f76;
+    color: white;
+  }
+  
+  .notification-item.read:hover {
+    background-color: #333636;
+  }
+  
+  .notification-item {
+    padding: 10px;
+    margin: 10px;
+  }
+  

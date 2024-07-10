@@ -1,0 +1,127 @@
+.loginpage {
+    background-color: #03242f;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 50px 100px;
+  }
+  
+  .login-form {
+    border: 0.1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-title {
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .form-label {
+    color: white;
+  }
+  
+  .form-check-label {
+    color: white;
+  }
+  
+  .login-button {
+    background: #3572ef;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .login-button:hover {
+    background-color: #050c9c;
+  }
+  
+  .mb-3 {
+    text-align: left;
+  }
+  
+  .login-facebook,
+  .login-google {
+    background: #eef7ff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 170px;
+    text-align: center;
+  }
+  
+  .login-google {
+    margin-top: 50px;
+    padding: 10px 175px;
+  }
+  
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .login-animation img {
+    animation: bounce 2s ease-in-out infinite;
+  }
+  
+  .error {
+    color: #ee4e4e;
+    font-size: 12px;
+    padding-top: 2px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .password-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #31363f;
+  }
+  
+  /* extra css for signup */
+  .signup-text {
+    color: white;
+    font-size: 16px;
+    padding-top: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .login-animation {
+      display: none;
+    }
+  
+    .loginpage {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .loginpage {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 50px 10px;
+    }
+  
+    .login-facebook,
+    .login-google {
+      padding: 10px 10px;
+    }
+  
+    .login-google {
+      padding: 10px 15px;
+    }
+  }
+  
