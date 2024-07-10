@@ -1,0 +1,32 @@
+.dashboard-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  
+  .dashboard-box {
+    background-color: #135f76;
+  
+    padding: 100px;
+    align-items: left;
+  }
+  
+  .dashboard-pharagraph {
+    color: white;
+    font-size: 18px;
+  }
+  
+  @media (max-width: 480px) {
+    .dashboard-box {
+      padding: 10px;
+    }
+  
+    .dashboard-title {
+      font-size: 18px;
+    }
+  
+    .dashboard-pharagraph {
+      font-size: 14px;
+    }
+  }
+  

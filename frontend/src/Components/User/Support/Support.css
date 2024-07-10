@@ -1,0 +1,54 @@
+.support-page {
+    padding: 20px;
+    background-color: #135f76;
+    color: white;
+  }
+  
+  .support-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    display: flex;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .support-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3572ef;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .support-form button:hover {
+    background-color: #050c9c;
+  }
+  
+  .ticket-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ticket-item {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

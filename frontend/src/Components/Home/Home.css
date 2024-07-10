@@ -1,0 +1,130 @@
+.welcome {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #03242f;
+    color: white;
+    padding: 50px 100px;
+  }
+  
+  .welcome-note {
+    text-align: left;
+  }
+  
+  .welcome-title {
+    padding-top: 50px;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fdffe2;
+  }
+  
+  .welcome-subtitle {
+    font-size: 32px;
+  }
+  
+  .welcome-content {
+    font-size: 14px;
+  }
+  
+  .welcome-login,
+  .welcome-signup {
+    background: #3572ef;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .welcome-login:hover,
+  .welcome-signup:hover {
+    background-color: #050c9c;
+  }
+  
+  .welcome-signup {
+    margin-left: 10px;
+  }
+  
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .welcome-img-img {
+    animation: bounce 2s ease-in-out infinite;
+    padding-top: 40px;
+  }
+  
+  /* about */
+  .about {
+    background-color: #f3f7ec;
+    padding: 50px 100px;
+  }
+  
+  .about-title {
+    font-size: 42px;
+    font-weight: 600;
+    text-align: left;
+  }
+  
+  .about-text {
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .mission {
+    background-color: #135f76;
+    color: white;
+    padding: 10px 20px;
+    margin: 40px 0px;
+    border-radius: 10px;
+  }
+  
+  .mission-title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .mission-text {
+    font-size: 20px;
+    text-align: justify;
+  }
+  
+  .about-content {
+    text-align: left;
+    font-size: 24px;
+  }
+  
+  .about-btn {
+    margin-top: 30px;
+  }
+  
+  /* Features*/
+  .features {
+    background-color: #03242f;
+    padding: 10px;
+  }
+  
+  .carousel-item {
+    text-align: center;
+    color: white;
+  }
+  
+  .carousel-indicators li {
+    background-color: white;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: transparent;
+  }
+  
+  .features-text {
+    text-align: left;
+    color: white;
+  }
+  
