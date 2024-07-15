@@ -7,6 +7,7 @@ import loginImage from "../../Assets/Images/loginImage.png";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -69,15 +70,24 @@ export default function Login() {
     if (validateForm()) {
       setLoading(true);
 
-      setTimeout(() => {
-        console.log("Form submitted");
-        setLoading(false);
-        setEmail("");
-        setPassword("");
-        setAgree(false);
-        setErrors({});
-        navigate("/dashboard");
-      }, 2000);
+      axios
+        .post("http://localhost:3001/login", { email, password })
+        .then((result) => {
+          console.log(result);
+          
+          if (result.data === "Success") {
+            setLoading(true);
+            setEmail("");
+            setPassword("");
+            setAgree(false);
+            setErrors({});
+            navigate("/dashboard");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     }
   };
 

@@ -3,6 +3,8 @@ import "./Login.css";
 import loginImage from "../../Assets/Images/loginImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -16,6 +18,8 @@ export default function SignUp() {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+  const navigate = useNavigate(); 
 
   const handleFacebookLogin = () => {
     // Implement logic to initiate Facebook login flow
@@ -72,12 +76,14 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (validateForm()) {
       setLoading(true);
 
-      setTimeout(() => {
-        console.log("Form submitted");
-        setLoading(false);
+      axios.post('http://localhost:3001/register', {name, email, password, confirmPassword})
+      .then(result => {
+        console.log(result);
+        setLoading(true);
         setName("");
         setUserName("");
         setEmail("");
@@ -85,9 +91,14 @@ export default function SignUp() {
         setConfirmPassword("");
         setAgree(false);
         setErrors({});
-      }, 2000);
-    }
-  };
+        navigate('/login');
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
+  }
+};
 
   const handleInputChange = (setter) => (e) => {
     setter(e.target.value);
