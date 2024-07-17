@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-const item=new mongoose.Schema({
-    name:String,
-    item:String
+
+const ItemSchema = new mongoose.Schema({
+    item:String,
+    quantity: Number,
+    price: Number
 })
+
+const ItemModal = mongoose.model("items", ItemSchema)
+module.exports = ItemModal

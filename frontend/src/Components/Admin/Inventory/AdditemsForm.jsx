@@ -15,6 +15,7 @@ export default function AdditemsForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
+    setFormData({ item: "", quantity: "", price: ""});
   };
 
   return (
@@ -38,6 +39,18 @@ export default function AdditemsForm({
           id="quantity"
           name="quantity"
           value={formData.quantity}
+          onChange={handleInputChange}
+          required
+          className="modal-input"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="price" style={{margin: "5px"}}>Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          value={formData.price}
           onChange={handleInputChange}
           required
           className="modal-input"
