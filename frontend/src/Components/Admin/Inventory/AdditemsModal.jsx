@@ -15,6 +15,7 @@ export default function AdditemsModal({
   const [formData, setFormData] = useState({
     item: "",
     quantity: "",
+    price: "",
   });
 
   useEffect(() => {
@@ -22,11 +23,13 @@ export default function AdditemsModal({
       setFormData({
         item: editItem.item,
         quantity: editItem.quantity,
+        price: editItem.price,
       });
     } else {
       setFormData({
         item: "",
         quantity: "",
+        price: "",
       });
     }
   }, [isEditMode, editItem]);

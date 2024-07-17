@@ -80,7 +80,7 @@ export default function SignUp() {
     if (validateForm()) {
       setLoading(true);
 
-      axios.post('http://localhost:3001/register', {name, email, password, confirmPassword})
+      axios.post('http://localhost:3001/register', {name, email, password})
       .then(result => {
         console.log(result);
         setLoading(true);
