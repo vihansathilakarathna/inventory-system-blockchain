@@ -65,6 +65,7 @@ export default function Login() {
     return isValid;
   };
 
+  axios.defaults.withCredentials = true;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -72,16 +73,25 @@ export default function Login() {
 
       axios
         .post("http://localhost:3001/api/users/login", { email, password })
-        .then((result) => {
-          console.log(result);
+        .then((res) => {
           
-          if (result.data === "Success") {
-            setLoading(true);
+          if (res.data.Status === "Success") {
+            if (res.data.role === "admin") {
+              setLoading(true);
+            setEmail("");
+            setPassword("");
+            setAgree(false);
+            setErrors({});
+            navigate("/admin/home");
+            } else {
+              setLoading(true);
             setEmail("");
             setPassword("");
             setAgree(false);
             setErrors({});
             navigate("/dashboard");
+            }
+            
           }
         })
         .catch((err) => {

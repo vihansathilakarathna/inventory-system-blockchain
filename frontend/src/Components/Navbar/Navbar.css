@@ -91,9 +91,8 @@
 }
 
 .navbar-menu-icon {
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  padding: 0 30px;
 }
 
 .topnav-menu {
