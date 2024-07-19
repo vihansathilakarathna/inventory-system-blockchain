@@ -2,19 +2,37 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const UserModel = require("./backend/models/User");
-const ItemModal = require("./backend/models/Item");
+//const ItemModal = require("./backend/models/Item");
+//const OrderModel = require("./backend/models/Order");
+const StockModel = require("./backend/models/Stock");
+const SalesModel = require("./backend/models/Sales");
 
+const userRoutes = require('./backend/routes/userRoutes');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect("mongodb://127.0.0.1:27017/inventory"),
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
+app.use('/api/users', userRoutes);
 
+
+mongoose.connect('mongodb://127.0.0.1:27017/inventory')
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => {
+        console.error(err.message);
+        process.exit(1);
+    });
+
+  /* Stock */
+
+
+  /* Order 
+  app.post("/createOrder", (req, res) => {
+    OrderModel.create(req.body)
+      .then((orders) => res.json(orders))
+      .catch((err) => res.json(err));
+  });
+*/
+  /* Item 
 app.get("/getItem/:id", (req, res) => {
   const id = req.params.id;
   ItemModal.findById({ _id: id })
@@ -46,38 +64,10 @@ app.post("/createItem", (req, res) => {
     .then((items) => res.json(items))
     .catch((err) => res.json(err));
 });
-
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  UserModel.findOne({ email: email }).then((user) => {
-    if (user) {
-      if (user.password === password) {
-        res.json("Success");
-      } else {
-        res.json("The Password is incorrect");
-      }
-    } else {
-      res.json("No record existed");
-    }
-  });
-});
-
-app.post("/register", (req, res) => {
-  UserModel.create(req.body)
-    .then((users) => res.json(users))
-    .catch((err) => res.json(err));
-});
-
-app.listen(3001, () => {
-  console.log("Server is running on port 3001");
-});
-
-/*
-    db.on('error',console.error.bind(console, 'connection error: '));
-    db.once('open', () => {
-        console.log('Connected to MongoDB');
-    })
-
-    const itemRoutes = require('./backend/routes/itemRoutes');
-    app.use('/api/items', itemRoutes);
 */
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+

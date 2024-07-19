@@ -4,14 +4,12 @@ import "./Stock.css";
 export default function Stock() {
   const totalItemsData = [
     {
-      orderID: 1,
-      stock: 200,
-      status: "Low",
+      item: "Item 1",
+      quantity: 400
     },
     {
-      orderID: 2,
-      stock: 400,
-      status: "Medium",
+      item: "Item 2",
+      quantity: 700
     },
   ];
   return (
@@ -24,17 +22,15 @@ export default function Stock() {
         <table>
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Current Stock</th>
-              <th>Status</th>
+              <th>Item</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
             {totalItemsData.map((item, index) => (
               <tr key={index}>
-                <td>{item.orderID}</td>
-                <td>{item.stock}</td>
-                <td>{item.status}</td>
+                <td>{item.item}</td>
+                <td>{item.quantity}</td>
               </tr>
             ))}
           </tbody>
