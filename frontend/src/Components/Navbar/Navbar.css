@@ -1,102 +1,101 @@
 .navbar {
-    background-color: #fdffe2;
-  }
-  
-  .navbar-logo-img {
-    width: 50px;
-    height: auto;
-  }
-  
-  .nav-link:hover {
-    background-color: white;
-    padding: 5px;
-  }
-  
-  .navbar-btn-btn {
-    background: #3572ef;
-    color: white;
-    padding: 10px 20px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 10px;
-  }
-  
-  .navbar-btn-btn:hover {
-    background-color: #050c9c;
-  }
-  
-  /*user side bar */
-  .sidebar-user {
-    min-width: 100px;
-    max-width: 250px;
-    background-color: #03242f;
-    height: 100vh;
-    text-align: left;
-    font-size: 20px;
-    padding-top: 10px;
-    position: fixed;
-  }
-  /*
-  .sidenav-link {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-  }
-  
-  .sidenav-link.active {
-    background-color: blue;
-    color: white;
-  }*/
-  
-  .sidenav-link {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  .sidenav-link:hover {
-  background-color: #135F76;
+  background-color: #fdffe2;
+}
+
+.navbar-logo-img {
+  width: 50px;
+  height: auto;
+}
+
+.nav-link:hover {
+  background-color: white;
+  padding: 5px;
+}
+
+.navbar-btn-btn {
+  background: #3572ef;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+.navbar-btn-btn:hover {
+  background-color: #050c9c;
+}
+
+/*user side bar */
+.sidebar-user {
+  min-width: 5%;
+  max-width: 12%;
+  background-color: #03242f;
+  height: 100vh;
+  text-align: left;
+  font-size: 20px;
+  padding-top: 2%;
+  position: fixed;
+  transition: all 0.3s;
+}
+
+.sidenav-link {
+  color: white;
+  padding: 0px 0 5px 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  margin: 5px;
+  border-radius: 10px;
+}
+.sidenav-link:hover {
+  background-color: #135f76;
   text-decoration: none;
   color: white;
-  }
-  
-  .sidenav-link.active {
-    background-color: #d9d9d9;
-    color: #000;
-  }
-  
-  .sidebar-user.collapsed .sidenav-link {
-    justify-content: center;
-  }
-  
-  .sidebar-copyright {
-    color: white;
-    padding: 10px 10px 10px 10px;
-    font-size: 12px;
-  }
-  
-  .hr {
-    margin: 300px 10px 10px 10px;
-    border-top: 2px solid #ffffff;
-  }
-  
-  .icons-sidebar {
-    font-size: 16px;
-    padding: 0 10px 0 0;
-  }
-  
-  .topnavbar {
-    background-color: #fdffe2;
-    height: 70px;
-  }
-  
-  .topnavbar-title {
-    font-size: 25px;
-    padding: 10px;
-    font-weight: 700;
-  }
-  
-  .topnav-menu {
-    padding: 18px 20px;
-  }
-  
+  border-radius: 10px;
+}
+
+.sidenav-link.active {
+  background-color: #d9d9d9;
+  color: #000;
+  border-radius: 10px;
+}
+
+.sidebar-user.collapsed .sidenav-link {
+  justify-content: center;
+}
+
+.sidebar-copyright {
+  color: white;
+  padding: 10px 10px 10px 10px;
+  font-size: 12px;
+}
+
+.hr {
+  margin: 300px 10px 10px 10px;
+  border-top: 2px solid #ffffff;
+}
+
+.icons-sidebar {
+  font-size: 16px;
+  padding: 0 10px 0 0;
+}
+
+.topnavbar {
+  background-color: #fdffe2;
+  height: 70px;
+}
+
+.topnavbar-title {
+  font-size: 25px;
+  padding: 10px;
+  font-weight: 700;
+}
+
+.navbar-menu-icon {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.topnav-menu {
+  color: white;
+}

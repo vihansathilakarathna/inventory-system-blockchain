@@ -4,9 +4,10 @@ import "./Sales.css";
 export default function Sales() {
   const totalItemsData = [
     {
-      date: "July 2",
+      orderID: 1,
       item: "djkhlk",
-      quantity: 200,
+      quantitySold: 200,
+      date: "2/24",
       total: 500,
     },
   ];
@@ -18,18 +19,20 @@ export default function Sales() {
         <table>
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Order ID</th>
               <th>Item</th>
-              <th>Quantity</th>
-              <th>Total</th>
+              <th>Quantity Sold</th>
+              <th>Date</th>
+              <th>Total Amount</th>
             </tr>
           </thead>
           <tbody>
             {totalItemsData.map((item, index) => (
               <tr key={index}>
-                <td>{item.date}</td>
+                <td>{item.orderID}</td>
                 <td>{item.item}</td>
-                <td>{item.quantity}</td>
+                <td>{item.quantitySold}</td>
+                <td>{item.date}</td>
                 <td>{item.total}</td>
               </tr>
             ))}

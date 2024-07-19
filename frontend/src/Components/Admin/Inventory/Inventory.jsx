@@ -10,11 +10,16 @@ export default function Inventory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editItemIndex, setEditItemIndex] = useState(null);
-  const [totalItemsData, setTotalItemsData] = useState([]);
+  const [totalItemsData, setTotalItemsData] = useState(() => {
+    const savedItems = localStorage.getItem("totalItemsData");
+    return savedItems ? JSON.parse(savedItems) : [];
+  });
 
   const {id} = useParams();
 
- 
+  useEffect(() => {
+    localStorage.setItem("totalItemsData", JSON.stringify(totalItemsData));
+  }, [totalItemsData]);
 
   useEffect (() => {
     axios.get('http://localhost:3001/getItem/' +id)

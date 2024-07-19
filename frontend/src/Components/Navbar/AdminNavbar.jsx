@@ -4,43 +4,30 @@ import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faBell,
   faBox,
-  faBoxOpen,
   faChartBar,
   faChartLine,
-  faClipboard,
-  faClipboardList,
-  faCog,
   faCubes,
-  faFileAlt,
   faFileInvoice,
   faHome,
-  faLifeRing,
-  faShoppingCart,
+  faUser,
   faUserCircle,
-  faWarehouse,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logo.png";
 import { Link, NavLink } from "react-router-dom";
 
-export default function AdminNavbar() {
+export default function AdminNavbar({ onCollapseToggle }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+    if (onCollapseToggle) onCollapseToggle();
   };
 
   return (
     <>
       <nav className="topnavbar fixed-top d-flex justify-content-between align-items-center p-3 text-black">
         <div className="d-flex ">
-          <FontAwesomeIcon
-            icon={faBars}
-            size="2x"
-            className="topnav-menu"
-            onClick={toggleSidebar}
-          />
           <img src={logo} alt="" className="navbar-logo-img" />
           <span className="topnavbar-title">STOCK CHAIN</span>
         </div>
@@ -62,8 +49,16 @@ export default function AdminNavbar() {
         </div>
       </nav>
 
-      <div className="d-flex pt-5">
+      <div className={`d-flex pt-5 ${isCollapsed ? "collapsed" : ""}`}>
         <div className={`sidebar-user ${isCollapsed ? "collapsed" : ""}`}>
+          <div className="navbar-menu-icon">
+            <FontAwesomeIcon
+              icon={faBars}
+              size="x1"
+              className="topnav-menu"
+              onClick={toggleSidebar}
+            />
+          </div>
           <div>
             <nav className="nav flex-column p-3">
               <NavLink
@@ -81,6 +76,14 @@ export default function AdminNavbar() {
               >
                 <FontAwesomeIcon icon={faBox} className="icons-sidebar" />
                 {!isCollapsed && "Inventory"}
+              </NavLink>
+              <NavLink
+                to="/admin/clients"
+                className="sidenav-link"
+                activeClassName="active"
+              >
+                <FontAwesomeIcon icon={faUser} className="icons-sidebar" />
+                {!isCollapsed && "Clients"}
               </NavLink>
 
               <NavLink

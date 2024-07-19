@@ -71,7 +71,7 @@ export default function Login() {
       setLoading(true);
 
       axios
-        .post("http://localhost:3001/login", { email, password })
+        .post("http://localhost:3001/api/users/login", { email, password })
         .then((result) => {
           console.log(result);
           

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 export default function CreateOrderForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     orderID: "",
-    supplier: "",
     item: "",
-    status: "Pending",
+    date: "",
+    amount: "",
   });
 
   const handleInputChange = (e) => {
@@ -16,6 +17,9 @@ export default function CreateOrderForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
+    axios.post("http://localhost:3001/createOrder", formData)
+    .then(result => console.log(result))
+    .catch(err => console.log(err))
   };
 
   return (
@@ -27,18 +31,6 @@ export default function CreateOrderForm({ onSubmit }) {
           id="orderID"
           name="orderID"
           value={formData.orderID}
-          onChange={handleInputChange}
-          required
-          className="modal-input"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="supplier" style={{margin: "5px"}}>Supplier</label>
-        <input
-          type="text"
-          id="supplier"
-          name="supplier"
-          value={formData.supplier}
           onChange={handleInputChange}
           required
           className="modal-input"
@@ -57,12 +49,24 @@ export default function CreateOrderForm({ onSubmit }) {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="status" style={{margin: "5px"}}>Status</label>
+        <label htmlFor="date" style={{margin: "5px"}}>Date</label>
         <input
-          type="text"
-          id="status"
-          name="status"
-          value={formData.status}
+          type= "date"
+          id="date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+          className="modal-input"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="amount" style={{margin: "5px"}}>Total Amount</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          value={formData.amount}
           onChange={handleInputChange}
           required
           className="modal-input"
