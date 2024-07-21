@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Dashboard from "../../Components/Dashboard/Dashboard";
 import AdminNavbar from "../../Components/Navbar/AdminNavbar";
+import AdminDashboard from "../../Components/Dashboard/AdminDashboard";
+
+
 export default function HomePage() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -26,7 +29,7 @@ export default function HomePage() {
         <AdminNavbar onCollapseToggle={handleCollapseToggle} />
       </div>
       <div>
-        <Dashboard style={contentStyle} />
+        <AdminDashboard style={contentStyle} />
       </div>
     </div>
   );

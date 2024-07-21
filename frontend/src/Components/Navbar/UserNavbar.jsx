@@ -14,23 +14,19 @@ import {
 import logo from "../../Assets/Images/logo.png";
 import { Link, NavLink } from "react-router-dom";
 
-export default function UserNavbar() {
+export default function UserNavbar({onCollapseToggle}) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+    if (onCollapseToggle) onCollapseToggle();
   };
 
   return (
     <>
       <nav className="topnavbar fixed-top d-flex justify-content-between align-items-center p-3 text-black">
         <div className="d-flex ">
-          <FontAwesomeIcon
-            icon={faBars}
-            size="2x"
-            className="topnav-menu"
-            onClick={toggleSidebar}
-          />
+          
           <img src={logo} alt="" className="navbar-logo-img" />
           <span className="topnavbar-title">STOCK CHAIN</span>
         </div>
@@ -52,8 +48,17 @@ export default function UserNavbar() {
         </div>
       </nav>
 
-      <div className="d-flex pt-5">
-        <div className={`sidebar-user ${isCollapsed ? "collapsed" : ""}`}>
+      <div className={`d-flex pt-5 ${isCollapsed ? "collapsed" : ""}`}>
+      
+      <div className={`sidebar-user ${isCollapsed ? "collapsed" : ""}`}>
+      <div className="navbar-menu-icon">
+        <FontAwesomeIcon
+            icon={faBars}
+            size="x1"
+            className="topnav-menu"
+            onClick={toggleSidebar}
+          />
+          </div>
           <div>
             <nav className="nav flex-column p-3">
               <NavLink
