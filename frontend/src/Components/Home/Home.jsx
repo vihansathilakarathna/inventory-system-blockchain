@@ -13,8 +13,7 @@ export default function Home() {
           Our inventory management system, InvenTrack, is designed to
           revolutionize how you manage your inventory. With cutting-edge
           features and an intuitive interface, InvenTrack ensures you have
-          complete control over your stock at all times. Here’s what you can
-          expect:
+          complete control over your stock at all times. 
         </p>
         <div className="welcome-btn">
           <Link to="/login">

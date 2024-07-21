@@ -13,6 +13,7 @@ const SalesModel = require("./backend/models/Sales");
 
 const userRoutes = require('./backend/routes/userRoutes');
 const itemRoutes = require('./backend/routes/itemRoutes');
+const clientRoutes =require('./backend/routes/clientRoutes');
 
 const app = express();
 app.use(bodyParser.json());
@@ -25,6 +26,7 @@ app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
 app.use('/api/items', itemRoutes);
+app.use('/api', clientRoutes);
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/inventory')

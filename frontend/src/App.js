@@ -15,6 +15,7 @@ import InventoryPage from './Pages/User/InventoryPage';
 import NotificationPage from './Pages/User/NotificationPage';
 import SupportPage from './Pages/User/SupportPage';
 import EditProfilePage from './Pages/User/EditProfilePage';
+import ClientPage from './Pages/Admin/ClientPage';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path='/user/notification' element={<NotificationPage />}></Route>
       <Route path='/user/support' element={<SupportPage />}></Route>
       <Route path='/editprofile' element={<EditProfilePage />}></Route>
+      <Route path='/admin/clients' element={<ClientPage />}></Route>
       </Routes>
       </BrowserRouter>
     </div>
