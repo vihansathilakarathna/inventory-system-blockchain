@@ -14,6 +14,7 @@ export default function AdditemsModal({
 }) {
   const [formData, setFormData] = useState({
     item: "",
+    catagory: "",
     quantity: "",
     price: "",
   });
@@ -28,6 +29,7 @@ export default function AdditemsModal({
     } else {
       setFormData({
         item: "",
+        catagory: "", 
         quantity: "",
         price: "",
       });
@@ -46,16 +48,23 @@ export default function AdditemsModal({
       className="Modal"
       overlayClassName="Overlay"
     >
+      <button
+        type="button"
+        className="close"
+        onClick={onClose}
+        aria-label="Close"
+        style={{ color: "#B43F3F" }}
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
       <h2>{isEditMode ? "Edit Item" : "Add New Item"}</h2>
+
       <AdditemsForm
         onSubmit={handleFormSubmit}
         formData={formData}
         setFormData={setFormData}
         isEditMode={isEditMode}
       />
-      <button type="button" className="cancel-button" onClick={onClose}>
-        Cancel
-      </button>
     </Modal>
   );
 }

@@ -15,7 +15,7 @@ export default function AdditemsForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    setFormData({ item: "", quantity: "", price: ""});
+    setFormData({ item: "", catagory: "", quantity: "", price: ""});
   };
 
   return (
@@ -33,9 +33,21 @@ export default function AdditemsForm({
         />
       </div>
       <div className="form-group">
+        <label htmlFor="catagory" style={{margin: "5px"}}>Catagory</label>
+        <input
+          type="text"
+          id="catagory"
+          name="catagory"
+          value={formData.catagory}
+          onChange={handleInputChange}
+          required
+          className="modal-input"
+        />
+        </div>
+      <div className="form-group">
         <label htmlFor="quantity" style={{margin: "5px"}}>Quantity</label>
         <input
-          type="number"
+          type="text"
           id="quantity"
           name="quantity"
           value={formData.quantity}
@@ -47,7 +59,7 @@ export default function AdditemsForm({
       <div className="form-group">
         <label htmlFor="price" style={{margin: "5px"}}>Price</label>
         <input
-          type="number"
+          type="text"
           id="price"
           name="price"
           value={formData.price}
