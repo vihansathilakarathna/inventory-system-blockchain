@@ -4,7 +4,7 @@ import AdditemsModal from "./AdditemsModal";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Inventory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function Inventory() {
   }, [totalItemsData]);
 
   useEffect (() => {
-    axios.get('http://localhost:3001/getItem/' +id)
+    axios.get('http://localhost:3001/api/items/getItem/' +id)
     .then(result => console.log(result))
     .catch(err => console.log(err))
   }, [])
@@ -48,7 +48,7 @@ export default function Inventory() {
       setTotalItemsData([...totalItemsData, { ...newItem, action: "delete" }]);
     }
     handleCloseModal();
-    axios.post("http://localhost:3001/createItem", { item: newItem.item, quantity: newItem.quantity, price: newItem.price })
+    axios.post("http://localhost:3001/api/items/createItem", { item: newItem.item, catagory: newItem.catagory, quantity: newItem.quantity, price: newItem.price, })
     .then(result => console.log(result))
     .catch(err => console.log(err))
   };
@@ -63,7 +63,7 @@ export default function Inventory() {
     setEditItemIndex(index);
     setIsEditMode(true);
     setIsModalOpen(true);
-    axios.put("http://localhost:3001/updateItem/"+id, {
+    axios.put("http://localhost:3001/api/items/updateItem/"+id, {
       item: itemToEdit.item,
       quantity: itemToEdit.quantity,
       price: itemToEdit.price
@@ -77,14 +77,18 @@ export default function Inventory() {
       <p className="ai-title">Inventory Management</p>
       <div className="ai-button-div">
         <button className="ai-button" onClick={handleOpenModal}>
-          Add Item +
+          Add Item 
         </button>
+        <Link to='/admin/orders'>
+        <button className="item-orderbtn">Place Order</button>
+        </Link>
       </div>
       <div>
-        <table>
+        <table style={{width: "95%"}}>
           <thead>
             <tr>
               <th>Item</th>
+              <th>Catagory</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>Action</th>
@@ -94,6 +98,7 @@ export default function Inventory() {
             {totalItemsData.map((item, index) => (
               <tr key={index}>
                 <td>{item.item}</td>
+                <td>{item.catagory}</td>
                 <td>{item.quantity}</td>
                 <td>{item.price}</td>
                 <td>

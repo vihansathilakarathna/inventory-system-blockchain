@@ -12,6 +12,7 @@ const StockModel = require("./backend/models/Stock");
 const SalesModel = require("./backend/models/Sales");
 
 const userRoutes = require('./backend/routes/userRoutes');
+const itemRoutes = require('./backend/routes/itemRoutes');
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,6 +24,7 @@ app.use(cors({
 app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
+app.use('/api/items', itemRoutes);
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/inventory')
@@ -42,39 +44,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/inventory')
       .catch((err) => res.json(err));
   });
 */
-  /* Item 
-app.get("/getItem/:id", (req, res) => {
-  const id = req.params.id;
-  ItemModal.findById({ _id: id })
-    .then((items) => res.json(items))
-    .catch((err) => res.json(err));
-});
-
-app.put("/updateItem/:id", (req, res) => {
-  const id = req.params.id;
-  ItemModal.findByIdAndUpdate(
-    { _id: id },
-    { item: req.body.item, quantity: req.body.quantity, price: req.body.price }
-  )
-    .then((items) => res.json(items))
-    .catch((err) => res.json(err));
-});
-
-app.delete("/deleteItem/:id", (req, res) => {
-    const id = req.params.id;
-    ItemModal.findByIdAndDelete(
-      { _id: id }
-    )
-      .then((items) => res.json(items))
-      .catch((err) => res.json(err));
-  });
-
-app.post("/createItem", (req, res) => {
-  ItemModal.create(req.body)
-    .then((items) => res.json(items))
-    .catch((err) => res.json(err));
-});
-*/
+  
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
