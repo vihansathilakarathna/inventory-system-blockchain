@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
-export default function Inventory() {
+export default function Inventory({ showButtons = true }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editItemIndex, setEditItemIndex] = useState(null);
@@ -74,7 +74,11 @@ export default function Inventory() {
 
   return (
     <div>
+      {showButtons && (
+      <div>
+      
       <p className="ai-title">Inventory Management</p>
+      
       <div className="ai-button-div">
         <button className="ai-button" onClick={handleOpenModal}>
           Add Item 
@@ -83,8 +87,10 @@ export default function Inventory() {
         <button className="item-orderbtn">Place Order</button>
         </Link>
       </div>
+      </div>
+    )}
       <div>
-        <table style={{width: "95%"}}>
+        <table style={{width: "95%"}} id="inventory-table">
           <thead>
             <tr>
               <th>Item</th>

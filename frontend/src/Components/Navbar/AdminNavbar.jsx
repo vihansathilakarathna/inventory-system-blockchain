@@ -119,7 +119,7 @@ export default function AdminNavbar({ onCollapseToggle }) {
                 activeClassName="active"
               >
                 <FontAwesomeIcon icon={faChartBar} className="icons-sidebar" />
-                {!isCollapsed && "Reports"}
+                {!isCollapsed && "Summary"}
               </NavLink>
             </nav>
           </div>
