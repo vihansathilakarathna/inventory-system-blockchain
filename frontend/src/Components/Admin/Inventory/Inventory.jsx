@@ -3,8 +3,8 @@ import "./InventoryAdmin.css";
 import AdditemsModal from "./AdditemsModal";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 
 export default function Inventory({ showButtons = true }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,17 +15,18 @@ export default function Inventory({ showButtons = true }) {
     return savedItems ? JSON.parse(savedItems) : [];
   });
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     localStorage.setItem("totalItemsData", JSON.stringify(totalItemsData));
   }, [totalItemsData]);
 
-  useEffect (() => {
-    axios.get('http://localhost:3001/api/items/getItem/' +id)
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
-  }, [])
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/items/getItem/" + id)
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -41,16 +42,24 @@ export default function Inventory({ showButtons = true }) {
   const handleAddItem = (newItem) => {
     if (isEditMode && editItemIndex !== null) {
       const updatedItems = totalItemsData.map((item, index) =>
-        index === editItemIndex ? { ...newItem, _id: item._id, action: "delete" } : item
+        index === editItemIndex
+          ? { ...newItem, _id: item._id, action: "delete" }
+          : item
       );
       setTotalItemsData(updatedItems);
     } else {
       setTotalItemsData([...totalItemsData, { ...newItem, action: "delete" }]);
     }
     handleCloseModal();
-    axios.post("http://localhost:3001/api/items/createItem", { item: newItem.item, catagory: newItem.catagory, quantity: newItem.quantity, price: newItem.price, })
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+    axios
+      .post("http://localhost:3001/api/items/createItem", {
+        item: newItem.item,
+        catagory: newItem.catagory,
+        quantity: newItem.quantity,
+        price: newItem.price,
+      })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   const handleDeleteItem = (index) => {
@@ -63,34 +72,34 @@ export default function Inventory({ showButtons = true }) {
     setEditItemIndex(index);
     setIsEditMode(true);
     setIsModalOpen(true);
-    axios.put("http://localhost:3001/api/items/updateItem/"+id, {
-      item: itemToEdit.item,
-      quantity: itemToEdit.quantity,
-      price: itemToEdit.price
-    })
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+    axios
+      .put("http://localhost:3001/api/items/updateItem/" + id, {
+        item: itemToEdit.item,
+        quantity: itemToEdit.quantity,
+        price: itemToEdit.price,
+      })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   return (
     <div>
       {showButtons && (
+        <div>
+          <p className="ai-title">Inventory Management</p>
+
+          <div className="ai-button-div">
+            <button className="ai-button" onClick={handleOpenModal}>
+              Add Item
+            </button>
+            <Link to="/admin/orders">
+              <button className="item-orderbtn">Place Order</button>
+            </Link>
+          </div>
+        </div>
+      )}
       <div>
-      
-      <p className="ai-title">Inventory Management</p>
-      
-      <div className="ai-button-div">
-        <button className="ai-button" onClick={handleOpenModal}>
-          Add Item 
-        </button>
-        <Link to='/admin/orders'>
-        <button className="item-orderbtn">Place Order</button>
-        </Link>
-      </div>
-      </div>
-    )}
-      <div>
-        <table style={{width: "95%"}} id="inventory-table">
+        <table style={{ width: "95%" }} id="inventory-table">
           <thead>
             <tr>
               <th>Item</th>
