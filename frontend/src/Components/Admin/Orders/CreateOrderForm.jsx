@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import moment from 'moment';
 
 export default function CreateOrderForm({ onSubmit }) {
   const [formData, setFormData] = useState({
-    orderID: "",
+    
     item: "",
-    date: "",
     amount: "",
   });
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,26 +17,15 @@ export default function CreateOrderForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
     onSubmit(formData);
-    axios.post("http://localhost:3001/createOrder", formData)
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+
+    
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="orderID" style={{margin: "5px"}}>Order ID</label>
-        <input
-          type="number"
-          id="orderID"
-          name="orderID"
-          value={formData.orderID}
-          onChange={handleInputChange}
-          required
-          className="modal-input"
-        />
-      </div>
+      
       <div className="form-group">
         <label htmlFor="item" style={{margin: "5px"}}>Item</label>
         <input
@@ -49,21 +39,9 @@ export default function CreateOrderForm({ onSubmit }) {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="date" style={{margin: "5px"}}>Date</label>
-        <input
-          type= "date"
-          id="date"
-          name="date"
-          value={formData.date}
-          onChange={handleInputChange}
-          required
-          className="modal-input"
-        />
-      </div>
-      <div className="form-group">
         <label htmlFor="amount" style={{margin: "5px"}}>Total Amount</label>
         <input
-          type="number"
+          type="text"
           id="amount"
           name="amount"
           value={formData.amount}

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
-import img1 from "../../Assets/Catagory/Tops/top1.jpg";
-import img2 from "../../Assets/Catagory/Dress/dress1.jpeg";
-import img3 from "../../Assets/Catagory/Dress/dress2.jpg";
-import img4 from "../../Assets/Catagory/Bottom/bottom1.jpeg";
-import img5 from "../../Assets/Catagory/Footwear/footwear1.jpg";
-import img6 from "../../Assets/Catagory/Accessories/accessories1.jpg";
+import img1 from "../../../Assets/Catagory/Tops/top1.jpg";
+import img2 from "../../../Assets/Catagory/Dress/dress1.jpeg";
+import img3 from "../../../Assets/Catagory/Dress/dress2.jpg";
+import img4 from "../../../Assets/Catagory/Bottom/bottom1.jpeg";
+import img5 from "../../../Assets/Catagory/Footwear/footwear1.jpg";
+import img6 from "../../../Assets/Catagory/Accessories/accessories1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 

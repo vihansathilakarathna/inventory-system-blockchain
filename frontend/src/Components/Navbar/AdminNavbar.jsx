@@ -62,7 +62,7 @@ export default function AdminNavbar({ onCollapseToggle }) {
           <div>
             <nav className="nav flex-column p-3">
               <NavLink
-                to="/admin/home"
+                to="/admin/dashboard"
                 className="sidenav-link"
                 activeClassName="active"
               >

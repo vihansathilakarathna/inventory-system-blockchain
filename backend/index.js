@@ -13,13 +13,13 @@ const SalesModel = require("./backend/models/Sales");
 
 const userRoutes = require('./backend/routes/userRoutes');
 const itemRoutes = require('./backend/routes/itemRoutes');
-const clientRoutes =require('./backend/routes/clientRoutes');
+const clientRoutes = require('./backend/routes/clientRoutes');
+const orderRoutes = require('./backend/routes/orderRoutes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
   origin: ['http://localhost:3000'],
-  methods: ['GET', 'POST'],
   credentials: true
 }));
 app.use(cookieParser());
@@ -27,6 +27,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api', clientRoutes);
+app.use('/api/order', orderRoutes)
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/inventory')
@@ -36,16 +37,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/inventory')
         process.exit(1);
     });
 
-  /* Stock */
 
+ 
 
-  /* Order 
-  app.post("/createOrder", (req, res) => {
-    OrderModel.create(req.body)
-      .then((orders) => res.json(orders))
-      .catch((err) => res.json(err));
-  });
-*/
   
 
 const PORT = process.env.PORT || 3001;

@@ -1,8 +1,6 @@
 import React,{useState} from "react";
-
-import Dashboard from "../../Components/Dashboard/Dashboard";
 import UserNavbar from "../../Components/Navbar/UserNavbar";
-import UserDashboard from "../../Components/Dashboard/UserDashboard";
+import UserDashboard from "../../Components/User/Dashboard/UserDashboard";
 
 export default function DashboardPage() {
   const [isCollapsed, setIsCollapsed] = useState(false);

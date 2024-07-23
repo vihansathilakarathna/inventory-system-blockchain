@@ -25,17 +25,17 @@ function App() {
       <Route path="/" element={<MainPage />}></Route>
       <Route path='/login' element={<LoginPage />}></Route>
       <Route path='/signup' element={<SignupPage/>}></Route>
-      <Route path='/admin/home' element={<HomePage/>}></Route>
+      <Route path='/admin/dashboard' element={<HomePage/>}></Route>
       <Route path='/admin/editprofile' element={<EditAdminProfilePage />}></Route>
       <Route path='/admin/inventory' element={<InventoryAdminPage />}></Route>
       <Route path='/admin/orders' element={<OrdersPage />}></Route>
       <Route path='/admin/reports' element={<ReportsPage />}></Route>
       <Route path='/admin/sales' element={<SalesPage />}></Route>
       <Route path='/admin/stock' element={<StockPage />}></Route>
-      <Route path='/dashboard' element={<DashboardPage />}></Route>
-      <Route path='/user/inventory' element={<InventoryPage />}></Route>
-      <Route path='/user/notification' element={<NotificationPage />}></Route>
-      <Route path='/user/support' element={<SupportPage />}></Route>
+      <Route path='/user/dashboard' element={<DashboardPage />}></Route>
+      <Route path='/user/orders' element={<InventoryPage />}></Route>
+      <Route path='/user/history' element={<NotificationPage />}></Route>
+      <Route path='/user/help' element={<SupportPage />}></Route>
       <Route path='/editprofile' element={<EditProfilePage />}></Route>
       <Route path='/admin/clients' element={<ClientPage />}></Route>
       </Routes>

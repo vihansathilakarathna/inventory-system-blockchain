@@ -7,8 +7,11 @@ import {
   faBell,
   faBox,
   faCog,
+  faHistory,
   faHome,
   faLifeRing,
+  faQuestionCircle,
+  faShoppingCart,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../Assets/Images/logo.png";
@@ -62,7 +65,7 @@ export default function UserNavbar({onCollapseToggle}) {
           <div>
             <nav className="nav flex-column p-3">
               <NavLink
-                to="/dashboard"
+                to="/user/dashboard"
                 className="sidenav-link"
                 activeClassName="active"
               >
@@ -70,29 +73,29 @@ export default function UserNavbar({onCollapseToggle}) {
                 {!isCollapsed && "Home"}
               </NavLink>
               <NavLink
-                to="/user/inventory"
+                to="/user/orders"
                 className="sidenav-link"
                 activeClassName="active"
               >
-                <FontAwesomeIcon icon={faBox} className="icons-sidebar" />
-                {!isCollapsed && "Inventory"}
+                <FontAwesomeIcon icon={faShoppingCart} className="icons-sidebar" />
+                {!isCollapsed && "Orders"}
               </NavLink>
 
               <NavLink
-                to="/user/notification"
+                to="/user/history"
                 className="sidenav-link"
                 activeClassName="active"
               >
-                <FontAwesomeIcon icon={faBell} className="icons-sidebar" />
-                {!isCollapsed && "Notification"}
+                <FontAwesomeIcon icon={faHistory} className="icons-sidebar" />
+                {!isCollapsed && "History"}
               </NavLink>
               <NavLink
-                to="/user/support"
+                to="/user/help"
                 className="sidenav-link"
                 activeClassName="active"
               >
-                <FontAwesomeIcon icon={faCog} className="icons-sidebar" />
-                {!isCollapsed && "Support"}
+                <FontAwesomeIcon icon={faQuestionCircle} className="icons-sidebar" />
+                {!isCollapsed && "Help"}
               </NavLink>
             </nav>
           </div>
