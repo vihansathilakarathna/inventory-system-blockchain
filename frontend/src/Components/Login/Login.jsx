@@ -82,14 +82,14 @@ export default function Login() {
             setPassword("");
             setAgree(false);
             setErrors({});
-            navigate("/admin/home");
+            navigate("/admin/dashboard");
             } else {
               setLoading(true);
             setEmail("");
             setPassword("");
             setAgree(false);
             setErrors({});
-            navigate("/dashboard");
+            navigate("/user/dashboard");
             }
             
           }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CreateOrderModal from "./CreateOrderModal";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
 
 export default function Orders() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,13 +25,28 @@ export default function Orders() {
   };
 
   const handleCreateOrder = (newOrder) => {
-    setOrders([...orders, newOrder]);
-    handleCloseModal();
+    const uniqueOrderID = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    const orderWithID = { ...newOrder, orderID: uniqueOrderID };
+
+    
+    
+
+    axios.post("http://localhost:3001/api/order/createOrder", orderWithID)
+      .then(result => {
+        setOrders([...orders, result.data]);
+      })
+      .catch(err => console.log(err));
+ 
+      handleCloseModal();
   };
 
-  const handleDeleteOrder = (index) => {
-    const updatedOrders = orders.filter((_, i) => i !== index);
-    setOrders(updatedOrders);
+  const handleDeleteOrder = (orderID, index) => {
+    axios.delete(`http://localhost:3001/api/order/deleteOrder/${orderID}`)
+      .then(() => {
+        const updatedOrders = orders.filter((_, i) => i !== index);
+        setOrders(updatedOrders);
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -42,7 +58,7 @@ export default function Orders() {
         </button>
       </div>
       <div>
-        <table>
+        <table style={{width: "95%", marginBottom: "5%"}}>
           <thead>
             <tr>
               <th>Order ID</th>
@@ -57,12 +73,12 @@ export default function Orders() {
               <tr key={index}>
                 <td>{item.orderID}</td>
                 <td>{item.item}</td>
-                <td>{item.date}</td>
+                <td>{new Date(item.date).toLocaleString()}</td>
                 <td>{item.amount}</td>
                 <td>
                   <FontAwesomeIcon
                     icon={faTrash}
-                    onClick={() => handleDeleteOrder(index)}
+                    onClick={() => handleDeleteOrder(item.orderID, index)}
                     className="ai-icon"
                   />
                 </td>

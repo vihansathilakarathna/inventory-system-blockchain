@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Dashboard from "../../Components/Dashboard/Dashboard";
 import AdminNavbar from "../../Components/Navbar/AdminNavbar";
-import AdminDashboard from "../../Components/Dashboard/AdminDashboard";
-
+import AdminDashboard from "../../Components/Admin/Dashboard/AdminDashboard";
 
 export default function HomePage() {
   const [isCollapsed, setIsCollapsed] = useState(false);
