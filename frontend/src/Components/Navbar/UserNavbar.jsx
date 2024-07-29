@@ -4,13 +4,9 @@ import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faBell,
-  faBox,
-  faCog,
   faHistory,
   faHome,
-  faLifeRing,
-  faQuestionCircle,
+  faInfoCircle,
   faShoppingCart,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
@@ -94,7 +90,7 @@ export default function UserNavbar({onCollapseToggle}) {
                 className="sidenav-link"
                 activeClassName="active"
               >
-                <FontAwesomeIcon icon={faQuestionCircle} className="icons-sidebar" />
+                <FontAwesomeIcon icon={faInfoCircle} className="icons-sidebar" />
                 {!isCollapsed && "Help"}
               </NavLink>
             </nav>
