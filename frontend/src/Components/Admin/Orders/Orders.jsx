@@ -6,15 +6,14 @@ import axios from 'axios';
 
 export default function Orders() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [orders, setOrders] = useState(() => {
-    const savedOrders = localStorage.getItem("orders");
-    return savedOrders ? JSON.parse(savedOrders) : [];
-  });
+  const [orders, setOrders] = useState([]);
 
 
   useEffect(() => {
-    localStorage.setItem("orders", JSON.stringify(orders));
-  }, [orders]);
+    axios.get('http://localhost:3001/api/order/getOrders') 
+      .then(response => setOrders(response.data))
+      .catch(error => console.log(error));
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -25,20 +24,15 @@ export default function Orders() {
   };
 
   const handleCreateOrder = (newOrder) => {
-    const uniqueOrderID = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-    const orderWithID = { ...newOrder, orderID: uniqueOrderID };
-
-    
-    
-
-    axios.post("http://localhost:3001/api/order/createOrder", orderWithID)
+    axios.post("http://localhost:3001/api/order/createOrder", newOrder)
       .then(result => {
-        setOrders([...orders, result.data]);
+        setOrders([...orders, result.data]); 
       })
       .catch(err => console.log(err));
- 
-      handleCloseModal();
+
+    handleCloseModal();
   };
+
 
   const handleDeleteOrder = (orderID, index) => {
     axios.delete(`http://localhost:3001/api/order/deleteOrder/${orderID}`)

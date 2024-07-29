@@ -36,6 +36,16 @@
   color: #03242f;
 }
 
+.price-tag {
+  font-size: 24px;
+  color: #03242f;
+}
+
+.modal-img-card {
+  width: 100px;
+  height: 100px;
+}
+
 .cart-order-div {
   justify-content: center;
   padding-bottom: 10px;
@@ -55,16 +65,18 @@
   justify-content: center;
 }
 
-.view-all-btn button {
+.view-all-btn button,
+.view-cart {
   background-color: #3572ef;
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 10px 22px;
+  padding: 8px 24px;
   margin: 10px;
 }
 
-.view-all-btn button:hover {
+.view-all-btn button:hover,
+.view-cart:hover {
   background-color: #050c9c;
 }
 
@@ -86,5 +98,20 @@
   padding: 0px 5px ;
   font-size: 12px;
 }
+
+.modal-card-btn {
+  background-color: #FF4C4C;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+.modal-card-btn:hover {
+  background-color: #C80036;
+}
+
 
 

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img1 from "../../../Assets/Catagory/Tops/top1.jpg";
 import img2 from "../../../Assets/Catagory/Dress/dress1.jpeg";
 import img3 from "../../../Assets/Catagory/Dress/dress2.jpg";
@@ -15,41 +15,66 @@ const cardItem = [
     title: "Classy Top",
     link: "/category/all",
     image: img1,
+    price: "5$",
   },
   {
     title: "Floral Dress",
     link: "/category/tops",
     image: img2,
+    price: "5$",
   },
   {
     title: "Mini Dress",
     link: "/category/tops",
     image: img3,
+    price: "5$",
   },
   {
     title: "Office Jean",
     link: "/category/tops",
     image: img4,
+    price: "5$",
   },
   {
     title: "Heels",
     link: "/category/tops",
     image: img5,
+    price: "5$",
   },
   {
     title: "Earrings",
     link: "/category/tops",
     image: img6,
+    price: "5$",
   },
 ];
 
 export default function UserDashboard() {
   const [cartItems, setCartItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+    if (savedCartItems) {
+      setCartItems(savedCartItems);
+      console.log("Loaded cart items from localStorage:", savedCartItems);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log("Saved cart items to localStorage:", cartItems);
+  }, [cartItems]);
 
   const handlePlaceOrder = (card) => {
-    setCartItems([...cartItems, card]);
+    const itemWithQuantity = { ...card, quantity: 1 };
+    setCartItems((prevItems) => {
+      const updatedItems = [...prevItems, itemWithQuantity];
+      console.log("Item added to cart:", itemWithQuantity);
+      console.log("Updated cart items:", updatedItems);
+      return updatedItems;
+    });
   };
 
   const handleCartClick = () => {
@@ -58,6 +83,20 @@ export default function UserDashboard() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleRemoveFromCart = (index) => {
+    setCartItems((prevItems) => {
+      const updatedItems = prevItems.filter((_, i) => i !== index);
+      console.log("Item removed from cart at index:", index);
+      console.log("Updated cart items after removal:", updatedItems);
+      return updatedItems;
+    });
+  };
+
+  const handleViewCart = () => {
+    navigate("/user/orders", { state: { cartItems } });
+    handleCloseModal();
   };
 
   return (
@@ -96,7 +135,9 @@ export default function UserDashboard() {
       </div>
       <div className="shopping-cart" onClick={handleCartClick}>
         <FontAwesomeIcon icon={faShoppingCart} size="2x" />
-        {cartItems.length > 0 && <span className='cart-count'>{cartItems.length}</span>}
+        {cartItems.length > 0 && (
+          <span className="cart-count">{cartItems.length}</span>
+        )}
       </div>
       <div className="row" style={{ marginTop: "20px" }}>
         {cardItem.map((card, index) => (
@@ -107,13 +148,14 @@ export default function UserDashboard() {
                 <a href={card.link}>
                   <img src={card.image} alt="" className="card-img" />
                 </a>
+                <p className="price-tag">{card.price}</p>
               </div>
               <div className="cart-order-div">
                 <button
                   className="card-order-btn"
                   onClick={() => handlePlaceOrder(card)}
                 >
-                  Place Order
+                  Add to cart
                 </button>
               </div>
             </div>
@@ -124,27 +166,67 @@ export default function UserDashboard() {
         <button>View All</button>
       </div>
       {showModal && (
-        <div className="modal show" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div
+          className="modal show"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: "block" }}
+        >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Shopping Cart</h5>
-                <button type="button" className="close" onClick={handleCloseModal} aria-label="Close">
+                <button
+                  type="button"
+                  className="close"
+                  onClick={handleCloseModal}
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="modal-body">
                 <ul className="list-group">
                   {cartItems.map((item, index) => (
-                    <li key={index} className="list-group-item d-flex align-items-center">
-                      <img src={item.image} alt={item.title} className='modal-img mr-3'/>
-                      <p className='mb-0'>{item.title}</p>
+                    <li
+                      key={index}
+                      className="list-group-item  d-flex align-items-center"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="modal-img-card mr-3"
+                      />
+                      <p
+                        className="mb-0"
+                        style={{
+                          marginRight: "10px",
+                          fontSize: "20px",
+                          color: "#03242f",
+                        }}
+                      >
+                        {item.title}
+                      </p>
+                      <p
+                        className="mb-0"
+                        style={{ fontSize: "20px", color: "#03242f" }}
+                      >
+                        {item.price}
+                      </p>
+                      <button
+                        className="modal-card-btn"
+                        onClick={() => handleRemoveFromCart(index)}
+                      >
+                        Remove
+                      </button>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="modal-footer">
-                
+                <button className="view-cart" onClick={handleViewCart}>
+                  View Cart
+                </button>
               </div>
             </div>
           </div>

@@ -1,0 +1,51 @@
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.quantity-controls button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity-controls button:hover {
+  background-color: #0056b3;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+
+.placeOrder-btn {
+  background-color: #03242f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 22px;
+  margin: 10px 0;
+}
+
+.placeOrder-btn:hover {
+  background-color: #050c9c;
+}
+
+.noOrder-txt {
+    font-size: 24px;
+}
+
+.remove-btn-order {
+    color: red;
+    margin: 0 20px;
+}
