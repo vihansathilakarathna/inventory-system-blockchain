@@ -1,24 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import UserNavbar from "../../Components/Navbar/UserNavbar";
-import Notification from "../../Components/User/Notification/Notification";
+import History from "../../Components/User/History/History";
 
 export default function NotificationPage() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const handleCollapseToggle = () => {
+    setIsCollapsed((prev) => !prev);
+  };
+
   const containerStyle = {
     display: "grid",
-    gridTemplateColumns: "250px 1fr",
+    gridTemplateColumns: isCollapsed ? "60px 1fr" : "100px 1fr",
     height: "100vh",
+    transition: "grid-template-columns 0.3s ease",
   };
 
   const contentStyle = {
-    padding: "100px 20px 20px 0",
+    marginLeft: isCollapsed ? "60px" : "100px",
+    transition: "margin-left 0.3s ease",
   };
   return (
     <div style={containerStyle}>
       <div>
-        <UserNavbar />
+        <UserNavbar onCollapseToggle={handleCollapseToggle}/>
       </div>
       <div style={contentStyle}>
-        <Notification />
+        <History />
       </div>
     </div>
   );
