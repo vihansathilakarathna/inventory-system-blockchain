@@ -48,7 +48,7 @@ export default function Support() {
 
   return (
     <div className="support-page">
-      <h2>Support</h2>
+      <h4>Contact Us</h4>
       <form ref={formRef} className="support-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -89,7 +89,9 @@ export default function Support() {
             onChange={handleChange}
           ></textarea>
         </div>
+        <div style={{alignItems: "center"}}>
         <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );

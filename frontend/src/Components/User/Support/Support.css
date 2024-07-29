@@ -2,11 +2,15 @@
     padding: 20px;
     background-color: #135f76;
     color: white;
+    width: 50%;
+    border-radius: 10px;
+    margin: 8% 20%;
   }
   
   .support-form {
     display: flex;
     flex-direction: column;
+    
   }
   
   .form-group {
@@ -29,10 +33,11 @@
   .support-form button {
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     background-color: #3572ef;
     color: white;
     cursor: pointer;
+    width: 30%;
   }
   
   .support-form button:hover {
