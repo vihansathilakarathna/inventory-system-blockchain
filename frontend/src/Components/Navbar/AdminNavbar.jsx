@@ -86,14 +86,7 @@ export default function AdminNavbar({ onCollapseToggle }) {
                 {!isCollapsed && "Clients"}
               </NavLink>
 
-              <NavLink
-                to="/admin/sales"
-                className="sidenav-link"
-                activeClassName="active"
-              >
-                <FontAwesomeIcon icon={faChartLine} className="icons-sidebar" />
-                {!isCollapsed && "Sales"}
-              </NavLink>
+             
               <NavLink
                 to="/admin/stock"
                 className="sidenav-link"
