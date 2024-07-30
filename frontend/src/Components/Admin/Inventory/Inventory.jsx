@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./InventoryAdmin.css";
 import AdditemsModal from "./AdditemsModal";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+
+const categories = ["top", "dress", "swimwear", "bottoms", "outerwear", "footwear", "accessories", "bags", "activewear"];
+
+const itemsByCategory = {
+  top: ["T-shirt", "Blouse", "Tank Top"],
+  dress: ["Long Dress", "Short Dress", "Daisy Dress"],
+  swimwear: ["One-piece", "Bikini", "Trunks"],
+  bottoms: ["Jeans", "Trousers", "Cargo pants"],
+  outerwear: ["Bomber jackets", "Trench coats", "Blazer"],
+  footwear: ["Sneakers", "Sandal", "Heel"],
+  accessories: ["Earring", "Necklaces", "Bracelets"],
+  bags: ["Tote Bags", "Shoulder Bags", "Backpacks"],
+  activewear: ["Hoodie", "Leggings", "Sleeveless shirt" ]
+};
 
 export default function Inventory({ showButtons = true }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +28,9 @@ export default function Inventory({ showButtons = true }) {
     const savedItems = localStorage.getItem("totalItemsData");
     return savedItems ? JSON.parse(savedItems) : [];
   });
+
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [itemFilter, setItemFilter] = useState("all");
 
   const { id } = useParams();
 
@@ -54,9 +71,10 @@ export default function Inventory({ showButtons = true }) {
     axios
       .post("http://localhost:3001/api/items/createItem", {
         item: newItem.item,
-        catagory: newItem.catagory,
+        category: newItem.category,
         quantity: newItem.quantity,
         price: newItem.price,
+        image: newItem.image,
       })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
@@ -77,10 +95,27 @@ export default function Inventory({ showButtons = true }) {
         item: itemToEdit.item,
         quantity: itemToEdit.quantity,
         price: itemToEdit.price,
+        image: itemToEdit.image,
       })
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
+
+  const handleCategoryChange = (e) => {
+    setCategoryFilter(e.target.value);
+    setItemFilter("all");
+  };
+
+  const handleItemChange = (e) => {
+    setItemFilter(e.target.value);
+  };
+
+  const filteredItems = totalItemsData.filter((item) => {
+    return (
+      (categoryFilter === "all" || item.category === categoryFilter) &&
+      (itemFilter === "all" || item.item === itemFilter)
+    );
+  });
 
   return (
     <div>
@@ -98,24 +133,84 @@ export default function Inventory({ showButtons = true }) {
           </div>
         </div>
       )}
+
+<div className="row mb-3" style={{ marginRight: "4%" }}>
+        <div className="col-md-6">
+          <div className="form-group position-relative">
+            <label htmlFor="categoryFilter">Category</label>
+            <select
+              className="form-control"
+              id="categoryFilter"
+              value={categoryFilter}
+              onChange={handleCategoryChange}
+            >
+              <option value="all">All</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </option>
+              ))}
+            </select>
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className="position-absolute end-0 top-50 translate-middle-y me-2 mt-3 fa-sm"
+              
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form-group position-relative">
+            <label htmlFor="itemFilter">Item</label>
+            <select
+              className="form-control"
+              id="itemFilter"
+              value={itemFilter}
+              onChange={handleItemChange}
+            >
+              <option value="all">All</option>
+              {categoryFilter !== "all" &&
+                itemsByCategory[categoryFilter].map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+            </select>
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className="position-absolute end-0 top-50 translate-middle-y me-2 mt-3 fa-sm"
+              
+            />
+          </div>
+        </div>
+      </div>
       <div>
         <table style={{ width: "95%" }} id="inventory-table">
           <thead>
             <tr>
               <th>Item</th>
-              <th>Catagory</th>
+              <th>Category</th>
               <th>Quantity</th>
               <th>Price</th>
+              <th>Image</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {totalItemsData.map((item, index) => (
+            {filteredItems.map((item, index) => (
               <tr key={index}>
                 <td>{item.item}</td>
-                <td>{item.catagory}</td>
+                <td>{item.category}</td>
                 <td>{item.quantity}</td>
                 <td>{item.price}</td>
+                <td>
+                  {item.image && (
+                    <img
+                      src={item.image}
+                      alt={item.item}
+                      style={{ width: "50px", height: "50px" }}
+                    />
+                  )}
+                </td>
                 <td>
                   <FontAwesomeIcon
                     icon={faPen}

@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useLocation,useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import "./Order.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 export default function Order() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const initialCartItems = location.state?.cartItems.map(item => ({ ...item, quantity: 1 })) || [];
+  const initialCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const [cartItems, setCartItems] = useState(initialCartItems);
+
+  useEffect(() => {
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
+  }, []);
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0).toFixed(2);
@@ -19,6 +23,7 @@ export default function Order() {
     const updatedCartItems = [...cartItems];
     updatedCartItems[index].quantity += 1;
     setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   const handleDecrement = (index) => {
@@ -26,6 +31,7 @@ export default function Order() {
     if (updatedCartItems[index].quantity > 1) {
       updatedCartItems[index].quantity -= 1;
       setCartItems(updatedCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     }
   };
 
@@ -36,23 +42,27 @@ export default function Order() {
     if (!isNaN(newQuantity) && newQuantity > 0) {
       updatedCartItems[index].quantity = newQuantity;
       setCartItems(updatedCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     }
   };
 
   const handleRemove = (index) => {
     const updatedCartItems = cartItems.filter((_, i) => i !== index);
     setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   const handlePlaceOrder = () => {
     const order = {
-      item: cartItems.map(item => `${item.title} (${item.quantity})`).join(', '),
+      item: cartItems.map(item => `${item.item} (${item.quantity})`).join(', '),
       amount: calculateTotal()
     };
 
     axios.post("http://localhost:3001/api/order/createOrder", order)
       .then(result => {
         alert('Order placed successfully');
+        localStorage.removeItem("cartItems");
+        setCartItems([]);
         navigate('/user/history');
       })
       .catch(err => console.log(err));
@@ -60,7 +70,6 @@ export default function Order() {
 
   return (
     <div style={{ margin: "100px 50px 100px 0" }}>
-      
       {cartItems.length > 0 ? (
         <>
           <ul className="list-group">
@@ -85,10 +94,9 @@ export default function Order() {
                   />
                   <button onClick={() => handleIncrement(index)}>+</button>
                 </div>
-                <div >
-                <FontAwesomeIcon icon={faMinusCircle} className="remove-btn-order" onClick={() => handleRemove(index)} />
+                <div>
+                  <FontAwesomeIcon icon={faMinusCircle} className="remove-btn-order" onClick={() => handleRemove(index)} />
                 </div> 
-                
               </li>
             ))}
           </ul>

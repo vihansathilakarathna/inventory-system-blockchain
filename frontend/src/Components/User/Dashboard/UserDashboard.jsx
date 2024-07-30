@@ -1,76 +1,48 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
-import { Link, useNavigate } from "react-router-dom";
-import img1 from "../../../Assets/Catagory/Tops/top1.jpg";
-import img2 from "../../../Assets/Catagory/Dress/dress1.jpeg";
-import img3 from "../../../Assets/Catagory/Dress/dress2.jpg";
-import img4 from "../../../Assets/Catagory/Bottom/bottom1.jpeg";
-import img5 from "../../../Assets/Catagory/Footwear/footwear1.jpg";
-import img6 from "../../../Assets/Catagory/Accessories/accessories1.jpg";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-
-const cardItem = [
-  {
-    title: "Classy Top",
-    link: "/category/all",
-    image: img1,
-    price: "5$",
-  },
-  {
-    title: "Floral Dress",
-    link: "/category/tops",
-    image: img2,
-    price: "5$",
-  },
-  {
-    title: "Mini Dress",
-    link: "/category/tops",
-    image: img3,
-    price: "5$",
-  },
-  {
-    title: "Office Jean",
-    link: "/category/tops",
-    image: img4,
-    price: "5$",
-  },
-  {
-    title: "Heels",
-    link: "/category/tops",
-    image: img5,
-    price: "5$",
-  },
-  {
-    title: "Earrings",
-    link: "/category/tops",
-    image: img6,
-    price: "5$",
-  },
-];
+import axios from "axios";
 
 export default function UserDashboard() {
   const [cartItems, setCartItems] = useState([]);
+  const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showAllItems, setShowAllItems] = useState(false);
+  const [currentCategory, setCurrentCategory] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-    if (savedCartItems) {
-      setCartItems(savedCartItems);
-      console.log("Loaded cart items from localStorage:", savedCartItems);
-    }
+    const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(savedCartItems);
+    console.log("Loaded cart items from localStorage:", savedCartItems);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log("Saved cart items to localStorage:", cartItems);
+    if (cartItems.length > 0) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      console.log("Saved cart items to localStorage:", cartItems);
+    }
   }, [cartItems]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/items/getAllItems")
+      .then((response) => {
+        setItems(response.data);
+        console.log("Loaded items from backend:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching items:", error);
+      });
+  }, []);
 
   const handlePlaceOrder = (card) => {
     const itemWithQuantity = { ...card, quantity: 1 };
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems, itemWithQuantity];
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       console.log("Item added to cart:", itemWithQuantity);
       console.log("Updated cart items:", updatedItems);
       return updatedItems;
@@ -88,6 +60,7 @@ export default function UserDashboard() {
   const handleRemoveFromCart = (index) => {
     setCartItems((prevItems) => {
       const updatedItems = prevItems.filter((_, i) => i !== index);
+      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       console.log("Item removed from cart at index:", index);
       console.log("Updated cart items after removal:", updatedItems);
       return updatedItems;
@@ -99,39 +72,92 @@ export default function UserDashboard() {
     handleCloseModal();
   };
 
+  const handleShowAllItems = () => {
+    setShowAllItems(true);
+  };
+
+  const handleCategoryClick = (category) => {
+    setCurrentCategory(category);
+    setShowAllItems(false);
+  };
+
+  const filteredItems =
+    currentCategory === "all"
+      ? items
+      : items.filter((item) => item.category === currentCategory);
+
   return (
     <div className="container mt-4">
       <div className="topbar-item">
-        <Link to="/category/all" className="dashboard-link">
-          <p>All</p>
-        </Link>
-        <Link to="/category/tops" className="dashboard-link">
-          <p>Tops</p>
-        </Link>
-        <Link to="/category/bottoms" className="dashboard-link">
-          <p>Bottoms</p>
-        </Link>
-        <Link to="/category/dresses" className="dashboard-link">
-          <p>Dresses</p>
-        </Link>
-        <Link to="/category/outerwear" className="dashboard-link">
-          <p>Outerwear</p>
-        </Link>
-        <Link to="/category/footwear" className="dashboard-link">
-          <p>Footwear</p>
-        </Link>
-        <Link to="/category/accessories" className="dashboard-link">
-          <p>Accessories</p>
-        </Link>
-        <Link to="/category/bags" className="dashboard-link">
-          <p>Bags</p>
-        </Link>
-        <Link to="/category/activewear" className="dashboard-link">
-          <p>Activewear</p>
-        </Link>
-        <Link to="/category/swimwear" className="dashboard-link">
-          <p>Swimwear</p>
-        </Link>
+        <p
+          onClick={() => handleCategoryClick("all")}
+          className="dashboard-link"
+        >
+          All
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("top")}
+          className="dashboard-link"
+        >
+          Tops
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("bottoms")}
+          className="dashboard-link"
+        >
+          Bottoms
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("dresses")}
+          className="dashboard-link"
+        >
+          Dresses
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("outerwear")}
+          className="dashboard-link"
+        >
+          Outerwear
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("footwear")}
+          className="dashboard-link"
+        >
+          Footwear
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("accessories")}
+          className="dashboard-link"
+        >
+          Accessories
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("bags")}
+          className="dashboard-link"
+        >
+          Bags
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("activewear")}
+          className="dashboard-link"
+        >
+          Activewear
+        </p>
+
+        <p
+          onClick={() => handleCategoryClick("swimwear")}
+          className="dashboard-link"
+        >
+          Swimwear
+        </p>
       </div>
       <div className="shopping-cart" onClick={handleCartClick}>
         <FontAwesomeIcon icon={faShoppingCart} size="2x" />
@@ -140,20 +166,20 @@ export default function UserDashboard() {
         )}
       </div>
       <div className="row" style={{ marginTop: "20px" }}>
-        {cardItem.map((card, index) => (
+      {filteredItems.slice(0, showAllItems ? filteredItems.length : 6).map((item, index) => (
           <div className="col-md-4 mb-4" key={index}>
             <div className="card h-100">
               <div className="card-body">
-                <h5 className="card-head">{card.title}</h5>
-                <a href={card.link}>
-                  <img src={card.image} alt="" className="card-img" />
-                </a>
-                <p className="price-tag">{card.price}</p>
+                <h5 className="card-head">{item.item}</h5>
+
+                <img src={item.image} alt="" className="card-img" />
+
+                <p className="price-tag">{item.price}</p>
               </div>
               <div className="cart-order-div">
                 <button
                   className="card-order-btn"
-                  onClick={() => handlePlaceOrder(card)}
+                  onClick={() => handlePlaceOrder(item)}
                 >
                   Add to cart
                 </button>
@@ -162,9 +188,11 @@ export default function UserDashboard() {
           </div>
         ))}
       </div>
-      <div className="view-all-btn">
-        <button>View All</button>
-      </div>
+      {!showAllItems && (
+        <div className="view-all-btn">
+          <button onClick={handleShowAllItems}>View All</button>
+        </div>
+      )}
       {showModal && (
         <div
           className="modal show"
