@@ -17,13 +17,12 @@ export default function Client() {
       }, [totalClient]);
 
       useEffect(() => {
-        axios.get('http://localhost:3001/api/clients')
+        axios.get('http://localhost:3001/api/users/users') 
             .then(response => {
                 setTotalClient(response.data);
             })
             .catch(error => console.log(error));
     }, [id]);
-
     
 
       const handleOpenModal = () => {
@@ -35,8 +34,12 @@ export default function Client() {
       };
 
       const handleFormSubmit = (data) => {
-        setTotalClient([...totalClient, data]);
-        handleCloseModal();  
+        axios.post('http://localhost:3001/api/users/clients', data)
+            .then(response => {
+                setTotalClient([...totalClient, response.data]);
+                handleCloseModal();
+            })
+            .catch(error => console.log(error));
     };
 
   return (
