@@ -14,9 +14,10 @@ export default function AdditemsModal({
 }) {
   const [formData, setFormData] = useState({
     item: "",
-    catagory: "",
+    category: "",
     quantity: "",
     price: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -25,13 +26,15 @@ export default function AdditemsModal({
         item: editItem.item,
         quantity: editItem.quantity,
         price: editItem.price,
+        image: editItem.image,
       });
     } else {
       setFormData({
         item: "",
-        catagory: "", 
+        category: "", 
         quantity: "",
         price: "",
+        image: "",
       });
     }
   }, [isEditMode, editItem]);
@@ -47,6 +50,7 @@ export default function AdditemsModal({
       contentLabel="Add Item Modal"
       className="Modal"
       overlayClassName="Overlay"
+      
     >
       <button
         type="button"
@@ -57,7 +61,7 @@ export default function AdditemsModal({
       >
         <span aria-hidden="true">&times;</span>
       </button>
-      <h2>{isEditMode ? "Edit Item" : "Add New Item"}</h2>
+      <h4>{isEditMode ? "Edit Item" : "Add New Item"}</h4>
 
       <AdditemsForm
         onSubmit={handleFormSubmit}

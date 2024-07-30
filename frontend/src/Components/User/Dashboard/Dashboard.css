@@ -19,6 +19,7 @@
 .dashboard-link {
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .dashboard-link:hover {

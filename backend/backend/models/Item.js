@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const ItemSchema = new mongoose.Schema({
     item:String,
-    catagory: String,
+    category: String,
     quantity: Number,
-    price: Number
+    price: Number,
+    image: String,
 })
 
 const ItemModal = mongoose.model("items", ItemSchema)
