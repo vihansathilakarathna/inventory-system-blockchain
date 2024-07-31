@@ -9,6 +9,16 @@ exports.getOrders = async (req, res) => {
   }
 };
 
+exports.getOrdersCount = async (req, res) => {
+  try {
+    const orders = await OrderModel.find();
+    const orderCount = await OrderModel.countDocuments();
+    res.json({ orders, orderCount });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.createOrder = async (req, res) => {
   try {
     const uniqueOrderID = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;

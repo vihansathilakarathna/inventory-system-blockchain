@@ -50,6 +50,16 @@ exports.getUsers = (req, res) => {
         .catch(err => res.status(400).json(err));
 };
 
+exports.getUsersCount = async (req, res) => {
+    try {
+      const users = await UserModel.find();
+      const userCount = await UserModel.countDocuments();
+      res.status(200).json({ users, userCount });
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+
 exports.createClient = (req, res) => {
     const { name, email } = req.body;
     const defaultPassword = "defaultPassword"; 
