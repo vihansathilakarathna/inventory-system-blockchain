@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-const categories = ["top", "dress", "swimwear", "bottoms", "outerwear", "footwear", "accessories", "bags", "activewear"];
+const categories = ["top", "dress", "kids", "bottoms", "outerwear", "footwear", "accessories", "bags", "activewear"];
 
 const itemsByCategory = {
   top: ["T-shirt", "Blouse", "Tank Top"],
   dress: ["Long Dress", "Short Dress", "Daisy Dress"],
-  swimwear: ["One-piece", "Bikini", "Trunks"],
+  kids: ["Boy", "Girl", "Baby"],
   bottoms: ["Jeans", "Trousers", "Cargo pants"],
   outerwear: ["Bomber jackets", "Trench coats", "Blazer"],
   footwear: ["Sneakers", "Sandal", "Heel"],

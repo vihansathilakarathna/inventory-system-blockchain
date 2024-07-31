@@ -9,6 +9,16 @@ exports.getAllItems = async (req, res) => {
     }
 };
 
+exports.getAllItemsCount = async (req, res) => {
+    try {
+      const items = await Item.find();
+      const itemCount = await Item.countDocuments();
+      res.json({ items, itemCount });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
 exports.getItem = async (req, res) => {
     try {
         const id = req.params.id;

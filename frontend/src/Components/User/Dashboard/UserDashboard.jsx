@@ -153,7 +153,7 @@ export default function UserDashboard() {
         </p>
 
         <p
-          onClick={() => handleCategoryClick("swimwear")}
+          onClick={() => handleCategoryClick("kids")}
           className="dashboard-link"
         >
           Swimwear
