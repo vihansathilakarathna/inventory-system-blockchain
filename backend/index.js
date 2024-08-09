@@ -5,6 +5,9 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const {Web3} = require("web3")
+
+require('dotenv').config();
 
 //const ItemModal = require("./backend/models/Item");
 //const OrderModel = require("./backend/models/Order");
@@ -29,14 +32,12 @@ app.use('/api/items', itemRoutes);
 app.use('/api', clientRoutes);
 app.use('/api/order', orderRoutes)
 
-
 mongoose.connect('mongodb://127.0.0.1:27017/inventory')
     .then(() => console.log('MongoDB connected'))
     .catch(err => {
         console.error(err.message);
         process.exit(1);
     });
-
 
  
 
@@ -47,3 +48,14 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+const web3 = new Web3('http://127.0.0.1:7545');
+
+console.log(Web3);
+
+web3.eth.getAccounts()
+  .then(accounts => {
+    console.log('Connected to Ganache. Accounts:', accounts);
+  })
+  .catch(error => {
+    console.error('Error connecting to Ganache:', error.message, error.stack);
+  });
